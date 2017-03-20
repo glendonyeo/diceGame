@@ -1,10 +1,12 @@
 Your company would like to develop an online dice game. The game rules are as below:
 
-1. The game contains 4 players. 2. Each player will have 6 dice in their dice up. 3. Each round all players will roll their dice at the same time.
+1. The game contains 4 players. 
 
-4. All dice with number 1 on top side will be passed to player on his right hand (the right most player
+2. Each player will have 6 dice in their dice up. 
 
-will pass the dice to left most player)
+3. Each round all players will roll their dice at the same time.
+
+4. All dice with number 1 on top side will be passed to player on his right hand (the right most player will pass the dice to left most player)
 
 5. All dice with number 6 on top side will be removed from their dice cup.
 

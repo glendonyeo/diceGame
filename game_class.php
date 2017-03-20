@@ -1,5 +1,7 @@
 <?php
 
+require_once('player_class.php');
+
 class Game{
     
     var $playerCount;
@@ -17,24 +19,11 @@ class Game{
     function run(){
 
         while(count($this -> winners) == 0){
-            echo "Round ".$this -> round;
-            for($j=0;$j<count($this -> players);$j++){
-                $this -> players[$j] -> throwDice();
-                $penalti = $this -> players[$j] -> processDice();
-
-                if($this -> players[$j] -> isWinner() && $j != 0){
-                    array_push($this -> winners,"Player ".$this -> players[$j]->num);
-                }
-                if($j + 1 == count($this -> players)){
-                    if($penalti == 0 && $this -> players[0] -> isWinner()){
-                        array_push($this -> winners,"Player ".$this -> players[0]->num);
-                    }
-                    $this -> players[0] -> addDiceCount($penalti);
-                }
-                else{
-                    $this -> players[$j+1] -> addDiceCount($penalti);
-                }
-            }
+            echo "<b>Round ".$this -> round ."</b>";
+            
+            $this -> newRound();
+            
+            $this -> processDice();
 
             $this -> printDiceResults();
 
@@ -48,6 +37,33 @@ class Game{
         }
 
         $this -> getWinner();
+        
+    }
+    
+    function newRound(){
+        for($j=0;$j<count($this -> players);$j++){
+            $this -> players[$j] -> throwDice();
+        }
+    }
+    
+    function processDice(){
+        for($j=0;$j<count($this -> players);$j++){
+            $penalti = $this -> players[$j] -> processDice();
+
+            if($this -> players[$j] -> isWinner() && $j != 0){
+                array_push($this -> winners,"Player ".$this -> players[$j]->num);
+            }
+
+            if($j + 1 == count($this -> players)){
+                if($penalti == 0 && $this -> players[0] -> isWinner()){
+                    array_push($this -> winners,"Player ".$this -> players[0]->num);
+                }
+                $this -> players[0] -> addDiceCount($penalti);
+            }
+            else{
+                $this -> players[$j+1] -> addDiceCount($penalti);
+            }
+        }
     }
 
     function printDiceResults(){
@@ -59,7 +75,7 @@ class Game{
     }
 
     function printRoundResults(){
-        echo "<b><u>After Rolled Modified:</u></b><br>";
+        echo "<b><u>After Rolled Moved/Removed:</u></b><br>";
 
         foreach($this -> players as $player){
             $player -> toString();
@@ -70,9 +86,6 @@ class Game{
     function getWinner(){
         echo "Winner is ".implode(", ",$this -> winners);
     }
-
-
-
 
 }
 
