@@ -10,4 +10,6 @@ Your company would like to develop an online dice game. The game rules are as be
 
 5. All dice with number 6 on top side will be removed from their dice cup.
 
-6. All players roll their dice again to start next round. 7. The player who first emptied their dice cup (could be more than 1 player) is winner(s).
+6. All players roll their dice again to start next round. 
+
+7. The player who first emptied their dice cup (could be more than 1 player) is winner(s).
